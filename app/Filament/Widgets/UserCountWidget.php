@@ -15,6 +15,11 @@ class UserCountWidget extends BaseWidget
             Stat::make('Total Users', User::count())
             ->description('Number of registered users')
             ->descriptionIcon('heroicon-o-users', IconPosition::Before),
+        
+            Stat::make('Total Admins', User::role('super_admin')->count())
+            ->description('Number of registered admins')
+            ->descriptionIcon('heroicon-o-users', IconPosition::Before),
+        
         ];
     }
 }
