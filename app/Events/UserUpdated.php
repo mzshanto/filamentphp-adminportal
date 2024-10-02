@@ -14,12 +14,14 @@ class UserUpdated implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $adminCount;
+
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public function __construct($adminCount)
     {
-        //
+        $this->adminCount = $adminCount;
     }
 
     /**
@@ -27,10 +29,13 @@ class UserUpdated implements ShouldBroadcastNow
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): array
+    public function broadcastOn()
     {
-        return [
-            new Channel('user-update'),
-        ];
+        return [new Channel('userUpdate')]; 
+    }
+
+    public function broadcastWith()
+    {
+        return ['adminCount' => $this->adminCount];
     }
 }

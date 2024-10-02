@@ -5,6 +5,8 @@ namespace App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use App\Events\UserUpdated;
+use Spatie\Permission\Models\Role;
 
 class EditUser extends EditRecord
 {
@@ -16,4 +18,10 @@ class EditUser extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
-}
+
+    protected function afterSave(): void
+    {
+        $adminCount = Role::findByName('super_admin')->users->count();
+        broadcast(new UserUpdated($adminCount))->toOthers();
+    }
+} 

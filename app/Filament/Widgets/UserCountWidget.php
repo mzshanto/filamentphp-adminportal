@@ -22,4 +22,13 @@ class UserCountWidget extends BaseWidget
         
         ];
     }
+    
+    // protected static string $view = 'filament.widgets.user-count-widget-view';
+
+    // protected function getViewData(): array
+    // {
+    //     return [
+    //         'initialAdminCount' => User::role('super_admin')->count(), // Fetch the initial admin count
+    //     ];
+    // }
 }
